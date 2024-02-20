@@ -1,1 +1,2 @@
 # LabyrinthSolver
+Michał Marciniak
