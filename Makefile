@@ -1,5 +1,5 @@
 all:
-	cc -Wall src/*.c -o bin/lsolve
+	gcc -Wall src/*.c -o bin/lsolve
 
 clean:
 	rm -f bin/*
