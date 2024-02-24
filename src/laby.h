@@ -10,9 +10,10 @@ typedef struct labyrinth {
 } labyrinth;
 
 
-void lab_init(labyrinth*, int, int);
-void lab_fill(labyrinth*, FILE*, int);
-void lab_print(labyrinth*, int, int);
+void lab_init(labyrinth*);
+void get_p_position(labyrinth*, FILE*, int);
+void lab_print(labyrinth*);
 void lab_free(labyrinth*, int);
+void get_square(labyrinth*, FILE*, int, int);
 
 #endif

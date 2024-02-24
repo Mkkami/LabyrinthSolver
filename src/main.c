@@ -29,9 +29,10 @@ int main(int argc, char **argv) {
     }
     get_size(in, &height, &width);
 
-    lab_init(lab, height, width);
-    lab_fill(lab, in, width);
-    lab_print(lab, height, width);
+    lab_init(lab);
+    get_p_position(lab, in, width);
+    get_square(lab, in, height, width);
+    lab_print(lab);
 
     printf("%d, %d\n", lab->pos_x, lab->pos_y);
 

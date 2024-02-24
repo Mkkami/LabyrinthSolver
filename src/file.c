@@ -1,4 +1,5 @@
 #include "file.h"
+
 void get_size(FILE *in, int *height, int *width) {
     int h = 0, w = 0;
     char c;
