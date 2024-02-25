@@ -18,8 +18,8 @@ enum Movement {
 
 typedef struct MoveInstruction {
     int steps;
-    enum dir Direction;
-    enum move Movement;
+    enum Direction dir;
+    enum Movement move;
 } MoveInstruction;
 
 #endif
