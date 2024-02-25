@@ -16,10 +16,10 @@ enum Movement {
     TURNLEFT,
 };
 
-typedef struct {
+typedef struct MoveInstruction {
     int steps;
     enum dir Direction;
     enum move Movement;
-};
+} MoveInstruction;
 
 #endif
