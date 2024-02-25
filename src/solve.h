@@ -1,5 +1,6 @@
 #ifndef _SOLVE_H
 #define _SOLVE_H
+#include "laby.h"
 
 enum Direction {
     NORTH,
@@ -21,5 +22,8 @@ typedef struct MoveInstruction {
     enum Direction dir;
     enum Movement move;
 } MoveInstruction;
+
+void print_steps(MoveInstruction*);
+void init_direction(labyrinth*, MoveInstruction*, int, int);
 
 #endif

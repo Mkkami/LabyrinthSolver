@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "laby.h"
 #include "file.h"
+#include "solve.h"
 
 int main(int argc, char **argv) {
     FILE *in = NULL;
@@ -9,6 +10,7 @@ int main(int argc, char **argv) {
     int width = 0;
 
     labyrinth *lab = malloc(sizeof(labyrinth));
+    MoveInstruction *minst = malloc(sizeof(MoveInstruction));
     if (lab == NULL) {
         fprintf(stderr, "%s: Nie mozna alokowac pamieci dla lab\n", argv[0]);
         return 1;
@@ -36,9 +38,13 @@ int main(int argc, char **argv) {
 
     printf("%d, %d\n", lab->pos_x, lab->pos_y);
 
+    init_direction(lab, minst, height, width);
+    print_steps(minst);
+
     fclose(in);
     lab_free(lab, height);
     free(lab);
+    free(minst);
 
     return 0;
 }
