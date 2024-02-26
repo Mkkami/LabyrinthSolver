@@ -3,8 +3,8 @@
 #include "laby.h"
 #include "solve.h"
 
-void turn_left(MoveInstruction *minst);
-void switch_turn_directon(MoveInstruction *minst);
-void move_forward(labyrinth *lab, MoveInstruction *minst);
+void turn_left(MoveInstruction*);
+void switch_turn_directon(MoveInstruction*);
+void move_forward(labyrinth*, MoveInstruction*);
 
 #endif

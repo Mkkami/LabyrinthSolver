@@ -27,7 +27,7 @@ void print_steps(MoveInstruction*);
 void init_direction(labyrinth*, MoveInstruction*, int, int);
 int check_right_x(labyrinth*, MoveInstruction*);
 int end_reached(labyrinth*, MoveInstruction*);
-int check_forward_x(labyrinth *lab, MoveInstruction *minst);
-int check_K(labyrinth *lab, MoveInstruction *minst);
+int check_forward_x(labyrinth*, MoveInstruction*);
+int check_K(labyrinth*, MoveInstruction*);
 
 #endif
