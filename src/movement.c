@@ -3,7 +3,7 @@
 #include "movement.h"
 
 void turn_left(MoveInstruction *minst) {
-    if (minst->move == FORWARD && minst->steps > 0) {
+    if (minst->move != TURNLEFT && minst->steps > 0) {
         print_steps(minst);
     }
     switch(minst->dir) {
@@ -21,17 +21,33 @@ void turn_left(MoveInstruction *minst) {
             break;
     }
     minst->steps++;
-    if (minst->steps == 3)
-        switch_turn_directon(minst);
 }
 
-void switch_turn_directon(MoveInstruction *minst) {
-    minst->dir = TURNRIGHT;
-    minst->steps = 1;
+void turn_right(MoveInstruction *minst) {
+    if (minst->move != TURNRIGHT && minst->steps > 0) {
+        print_steps(minst);
+    }
+    switch(minst->dir) {
+    case NORTH:
+        minst->dir = EAST;
+        break;
+    case EAST:
+        minst->dir = SOUTH;
+        break;
+    case SOUTH:
+        minst->dir = WEST;
+        break;
+    case WEST:
+        minst->dir = NORTH;
+        break;
+    }
+    minst->steps++;
 }
 
 void move_forward(labyrinth *lab, MoveInstruction *minst) {
-
+    if (minst->move != FORWARD && minst->steps > 0) {
+        print_steps(minst);
+    }
     switch(minst->dir) {
         case NORTH:
             lab->pos_y--;
