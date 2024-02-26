@@ -33,18 +33,40 @@ int main(int argc, char **argv) {
         free(minst);
         return 2;
     }
+    //
+    
     //initialize
     get_size(in, &height, &width);
 
     lab_init(lab);
     get_p_position(lab, in, width);
     get_square(lab, in, height, width);
-    lab_print(lab);
 
     init_direction(lab, minst, height, width);
-    print_steps(minst);
     //
 
+    //run
+    while (!end_reached(lab, minst)) {
+        if (!check_K(lab, minst)) {
+            if (check_right_x(lab, minst)) {
+                if (!check_forward_x(lab, minst)) {
+                    move_forward(lab, minst);
+                    get_square(lab, in, height, width);
+                } else {
+                    turn_left(minst);
+                }
+
+            } else {
+                turn_right(minst);
+                move_forward(lab, minst);
+                get_square(lab, in, height, width);
+            }
+        } else {
+            printf("K found!!!\n");
+            break;
+        }
+    }
+    //
 
     //free memory
     fclose(in);
