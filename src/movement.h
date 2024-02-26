@@ -4,7 +4,7 @@
 #include "solve.h"
 
 void turn_left(MoveInstruction*);
-void switch_turn_directon(MoveInstruction*);
+void turn_right(MoveInstruction*);
 void move_forward(labyrinth*, MoveInstruction*);
 
 #endif
