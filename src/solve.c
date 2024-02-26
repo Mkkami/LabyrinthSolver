@@ -82,3 +82,12 @@ int check_forward_x(labyrinth *lab, MoveInstruction *minst) {
     }
     return (lab->board[y][x] == 'X');
 }
+
+int check_K(labyrinth *lab, MoveInstruction *minst) {
+
+    if (lab->board[MID-1][MID] == 'K') return 1;
+    if (lab->board[MID+1][MID] == 'K') return 1;
+    if (lab->board[MID][MID-1] == 'K') return 1;
+    if (lab->board[MID][MID+1] == 'K') return 1;
+    return 0;
+}
