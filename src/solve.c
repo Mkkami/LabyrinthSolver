@@ -1,5 +1,5 @@
 #include "solve.h"
-#define MID 2
+#define MID 1
 
 void print_steps(MoveInstruction *minst) {
     switch(minst->move) {
@@ -60,4 +60,25 @@ int end_reached(labyrinth *lab, MoveInstruction *minst) {
         return 1;
     }
     return 0;
+}
+
+int check_forward_x(labyrinth *lab, MoveInstruction *minst) {
+    int x = MID;
+    int y = MID;
+
+    switch(minst->dir) {
+        case NORTH:
+            y--;
+            break;
+        case EAST:
+            x++;
+            break;
+        case SOUTH:
+            y++;
+            break;
+        case WEST:
+            x--;
+            break;
+    }
+    return (lab->board[y][x] == 'X');
 }
