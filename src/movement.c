@@ -56,13 +56,13 @@ void move_forward(labyrinth *lab, MoveInstruction *minst) {
             lab->pos_y--;
             break;
         case EAST:
-            lab->pos_x--;
+            lab->pos_x++;
             break;
         case SOUTH:
             lab->pos_y++;
             break;
         case WEST:
-            lab->pos_x++;
+            lab->pos_x--;
             break;
     }
     minst->steps++;
