@@ -26,5 +26,6 @@ typedef struct MoveInstruction {
 void print_steps(MoveInstruction*);
 void init_direction(labyrinth*, MoveInstruction*, int, int);
 int check_right_x(labyrinth*, MoveInstruction*);
+int end_reached(labyrinth*, MoveInstruction*);
 
 #endif

@@ -1,5 +1,5 @@
 #include "solve.h"
-
+#define MID 2
 
 void print_steps(MoveInstruction *minst) {
     switch(minst->move) {
@@ -35,8 +35,8 @@ void init_direction(labyrinth *lab, MoveInstruction *minst, int height, int widt
 }
 
 int check_right_x(labyrinth *lab, MoveInstruction *minst) {
-    int x = 2;
-    int y = 2;
+    int x = MID;
+    int y = MID;
     
     switch(minst->dir) {
         case NORTH:
@@ -53,4 +53,11 @@ int check_right_x(labyrinth *lab, MoveInstruction *minst) {
             break;
     }
     return lab->board[y][x] == 'X';
+}
+
+int end_reached(labyrinth *lab, MoveInstruction *minst) {
+    if (lab->board[MID][MID] == 'K') {
+        return 1;
+    }
+    return 0;
 }
