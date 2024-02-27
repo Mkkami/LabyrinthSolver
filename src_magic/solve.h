@@ -13,6 +13,7 @@ typedef struct MoveInstruction {
     enum Direction dir;
 } MoveInstruction;
 
+void initiate(square*, MoveInstruction*, FILE*, const int, const int);
 void init_direction(square*, MoveInstruction*, const int, const int);
 int check_right_elem(square*, MoveInstruction*, const char);
 int end_reached(square*, MoveInstruction*);

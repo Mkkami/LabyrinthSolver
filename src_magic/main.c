@@ -35,10 +35,7 @@ int main(int argc, char **argv) {
     fclose(in);
     //
     sqr_init(sqr);
-    get_p_position(sqr, out, width);
-    get_square(sqr, out, height, width);
-
-    init_direction(sqr, minst, height, width);
+    initiate(sqr, minst, out, height, width);
     //zmien kolor
     while (!end_reached(sqr, minst)) {
         if (!check_K(sqr, minst)) {
@@ -62,37 +59,10 @@ int main(int argc, char **argv) {
             break;
         }
     }
-    get_p_position(sqr, out, width);
-    get_square(sqr, out, height, width);
-    sqr_print(sqr);
-    printf("\n");
-
-    init_direction(sqr, minst, height, width);
+    initiate(sqr, minst, out, height, width);
     fseek(out, 0, SEEK_SET);
 
-    while (!end_reached(sqr, minst)) {
-        if (!check_K(sqr, minst)) {
-            if (check_left_elem(sqr, minst, '+')) {
-                turn_left(minst);
-                move_forward(sqr, minst);
-                get_square(sqr, out, height, width);
-                change_to_elem(sqr, out, width, 'o'); 
-            } else if (check_forward(sqr, minst, '+')) {
-                    move_forward(sqr, minst);
-                    change_to_elem(sqr, out, width, 'o');
-                    get_square(sqr, out, height, width);
-                    
-            } else {
-                turn_right(minst);
-                move_forward(sqr, minst);
-                get_square(sqr, out, height, width);
-                change_to_elem(sqr, out, width, 'o');
-            }
-        } else {
-            printf("K found program end\n");
-            break;
-        }
-    }
+    mark_shortest_path(sqr, minst, out, height, width);
 
     //zamknij pliki
     fclose(out);

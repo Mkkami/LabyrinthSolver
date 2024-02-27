@@ -1,6 +1,12 @@
 #include "solve.h"
 #define MID 1
 
+void initiate(square *sqr, MoveInstruction *minst, FILE *out, const int height, const int width) {
+    get_p_position(sqr, out, width);
+    get_square(sqr, out, height, width);
+    init_direction(sqr, minst, height, width);
+}
+
 void init_direction(square *sqr, MoveInstruction *minst, const int height, const int width) {
     if (sqr->pos_x == 1)
         minst->dir = EAST;
