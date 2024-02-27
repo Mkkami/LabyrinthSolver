@@ -1,6 +1,6 @@
 #ifndef _SOLVE_H
 #define _SOLVE_H
-#include "laby.h"
+#include "square.h"
 
 enum Direction {
     NORTH,
@@ -24,10 +24,10 @@ typedef struct MoveInstruction {
 } MoveInstruction;
 
 void print_steps(MoveInstruction*);
-void init_direction(labyrinth*, MoveInstruction*, int, int);
-int check_right_x(labyrinth*, MoveInstruction*);
-int end_reached(labyrinth*, MoveInstruction*);
-int check_forward_x(labyrinth*, MoveInstruction*);
-int check_K(labyrinth*, MoveInstruction*);
+void init_direction(square*, MoveInstruction*, int, int);
+int check_right_x(square*, MoveInstruction*);
+int end_reached(square*, MoveInstruction*);
+int check_forward_x(square*, MoveInstruction*);
+int check_K(square*, MoveInstruction*);
 
 #endif

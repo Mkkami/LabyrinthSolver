@@ -9,3 +9,9 @@ mem_check:
 
 run:
 	./bin/lsolve maze_files/$(FILE)
+
+magic:
+	gcc -Wall src_magic/*.c -o bin/modfile
+
+modify:
+	./bin/modfile maze_files/$(FILE)

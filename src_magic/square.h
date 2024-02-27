@@ -1,5 +1,5 @@
-#ifndef _square_H
-#define _square_H
+#ifndef _SQUARE_H
+#define _SQUARE_H
 #include <stdio.h>
 #include <stdlib.h>
 

@@ -61,7 +61,7 @@ void get_square(square *sqr, FILE *in, int height, int width) {
                 sqr->board[i][j] = 'X';
 
             } else {
-                index =  (y * (width + 1)) + x;
+                index =  ((y) * (width + 1)) + x;
                 fseek(in, index, SEEK_SET);
                 sqr->board[i][j] = fgetc(in);
             }

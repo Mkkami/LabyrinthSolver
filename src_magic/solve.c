@@ -1,40 +1,18 @@
 #include "solve.h"
 #define MID 1
 
-void print_steps(MoveInstruction *minst) {
-    switch(minst->move) {
-        case START:
-            printf("START");
-            break;
-        case FORWARD:
-            printf("FORWARD %d", minst->steps);
-            break;
-        case TURNRIGHT:
-            printf("TURNRIGHT %d", minst->steps);
-            break;
-        case TURNLEFT:
-            printf("TURNLEFT %d", minst->steps);
-            break;
-        case STOP:
-            printf("STOP");
-            break;
-    }
-    printf("\n");
-    minst->steps = 0;
-}
-
-void init_direction(square *sqr, MoveInstruction *minst, int height, int width) {
-    if (sqr->pos_x == 0)
+void init_direction(square *sqr, MoveInstruction *minst, const int height, const int width) {
+    if (sqr->pos_x == 1)
         minst->dir = EAST;
     if (sqr->pos_x == width)
         minst->dir = WEST;
-    if (sqr->pos_y == 0)
+    if (sqr->pos_y == 1)
         minst->dir = SOUTH;
     if (sqr->pos_y == height)
         minst->dir = NORTH;
 }
 
-int check_right_x(square *sqr, MoveInstruction *minst) {
+int check_right_elem(square *sqr, MoveInstruction *minst, const char element) {
     int x = MID;
     int y = MID;
     
@@ -52,7 +30,7 @@ int check_right_x(square *sqr, MoveInstruction *minst) {
             y--;
             break;
     }
-    return sqr->board[y][x] == 'X';
+    return sqr->board[y][x] == element;
 }
 
 int end_reached(square *sqr, MoveInstruction *minst) {
@@ -62,7 +40,7 @@ int end_reached(square *sqr, MoveInstruction *minst) {
     return 0;
 }
 
-int check_forward_x(square *sqr, MoveInstruction *minst) {
+int check_forward(square *sqr, MoveInstruction *minst, const char element) {
     int x = MID;
     int y = MID;
 
@@ -80,7 +58,7 @@ int check_forward_x(square *sqr, MoveInstruction *minst) {
             x--;
             break;
     }
-    return (sqr->board[y][x] == 'X');
+    return (sqr->board[y][x] == element);
 }
 
 int check_K(square *sqr, MoveInstruction *minst) {
@@ -92,6 +70,23 @@ int check_K(square *sqr, MoveInstruction *minst) {
     return 0;
 }
 
-int check_R(square *sqr, MoveInstruction *minst) {
-    //checks if there's T from left to right - it is the shortest path
+int check_left_elem(square *sqr, MoveInstruction *minst, const char element) {
+    int x = MID;
+    int y = MID;
+    
+    switch(minst->dir) {
+        case NORTH:
+            x--;
+            break;
+        case EAST:
+            y--;
+            break;
+        case SOUTH:
+            x++;
+            break;
+        case WEST:
+            y++;
+            break;
+    }
+    return sqr->board[y][x] == element;
 }
