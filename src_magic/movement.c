@@ -1,5 +1,3 @@
-#include "solve.h"
-#include "square.h"
 #include "movement.h"
 
 void turn_left(MoveInstruction *minst) {
@@ -50,5 +48,39 @@ void move_forward(square *sqr, MoveInstruction *minst) {
         case WEST:
             sqr->pos_x--;
             break;
+    }
+}
+
+void turn_back(MoveInstruction *minst) {
+    switch(minst->dir) {
+    case NORTH:
+        minst->dir = SOUTH;
+        break;
+    case EAST:
+        minst->dir = WEST;
+        break;
+    case SOUTH:
+        minst->dir = NORTH;
+        break;
+    case WEST:
+        minst->dir = EAST;
+        break;
+    }
+}
+#include <stdio.h>
+void print_dir(MoveInstruction *minst) {
+    switch(minst->dir) {
+    case NORTH:
+        printf("NORTH");
+        break;
+    case EAST:
+        printf("EAST");
+        break;
+    case SOUTH:
+        printf("SOUTH");
+        break;
+    case WEST:
+        printf("WEST");
+        break;
     }
 }

@@ -9,25 +9,6 @@ void sqr_init(square *sqr) {
     }
 }
 
-void get_p_position(square *sqr, FILE *in, int width) {
-    fseek(in, 0, SEEK_SET);
-    char buf;
-    int i = 0, j = 0;
-    
-    while (fscanf(in, "%c", &buf) != EOF) {
-        if (buf == 'P') {
-            sqr->pos_x = j;
-            sqr->pos_y = i;
-            return;
-        } else if (buf == '\n') {
-            j = 0;
-            i++;
-        } else
-            j++;
-    }
-
-}
-
 void sqr_print(square *sqr) {
     for (int i = 0; i < SQUARE_SIZE; i++) {
         for (int j = 0; j < SQUARE_SIZE; j++)
@@ -57,14 +38,9 @@ void get_square(square *sqr, FILE *in, int height, int width) {
             int x = start_x + j;
             int y = start_y + i;
 
-            if (x < 0 || y < 0 || x >= width || y >= height ) {
-                sqr->board[i][j] = 'X';
-
-            } else {
-                index =  ((y) * (width + 1)) + x;
-                fseek(in, index, SEEK_SET);
-                sqr->board[i][j] = fgetc(in);
-            }
+            index =  ((y) * (width + 1)) + x;
+            fseek(in, index, SEEK_SET);
+            sqr->board[i][j] = fgetc(in);
         }
     }
 }

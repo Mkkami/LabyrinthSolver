@@ -14,4 +14,10 @@ magic:
 	gcc -Wall src_magic/*.c -o bin/modfile
 
 modify:
-	./bin/modfile maze_files/$(FILE)
+	./bin/modfile
+
+comcopy:
+	gcc -Wall src_copy/*.c -o bin/mcopy
+
+copy:
+	./bin/mcopy maze_files/$(F)

@@ -1,24 +1,19 @@
 #ifndef _SOLVE_H
 #define _SOLVE_H
-#include "square.h"
 
-enum Direction {
-    NORTH,
-    EAST,
-    SOUTH,
-    WEST,
-};
+#include <stdio.h> //FILE
+#include "file.h" //get_p_position, change_to_elem, 
+#include "square.h" //get_square
 
-typedef struct MoveInstruction {
-    enum Direction dir;
-} MoveInstruction;
+#include "movement.h"
+#include "checks.h"
+
+#include "structures.h"
+
+//FOR SOLVING THE MAZE
 
 void initiate(square*, MoveInstruction*, FILE*, const int, const int);
 void init_direction(square*, MoveInstruction*, const int, const int);
-int check_right_elem(square*, MoveInstruction*, const char);
-int end_reached(square*, MoveInstruction*);
-int check_forward(square*, MoveInstruction*, const char);
-int check_K(square*, MoveInstruction*);
-int check_left_elem(square*, MoveInstruction*, const char);
+void fill_dead_end(square *, MoveInstruction *, FILE *, const int, const int);
 
 #endif
