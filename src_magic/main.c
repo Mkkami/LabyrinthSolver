@@ -23,12 +23,16 @@ int main(int argc, char **argv) {
 
 
     fill_dead_end(sqr, minst, in, height, width);
+    printf("Plik copy.maze został zmodyfikowany.\n\n")
 
     //zamknij pliki
     fclose(in);
-    //
+    
+    //free mem
+    sqr_free(sqr, height);
+    free(sqr);
+    free(minst);
 
-    print_file("TEMP/copy.maze");
 
     return 0;
 }
