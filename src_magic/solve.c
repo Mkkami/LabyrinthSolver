@@ -18,19 +18,25 @@ void init_direction(square *sqr, MoveInstruction *minst, const int height, const
 }
 
 void fill_dead_end(square *sqr, MoveInstruction *minst, FILE *filename, const int height, const int width) {
-    int filling_process = 0;
+    int filling_process = 0;    //sprawdza czy już wypełnia pola, aby nie obrócić się drugi raz
 
     while (!end_reached(sqr, minst)) {
-        // print_dir(minst);
-        // printf(" %d, %d\n", sqr->pos_x, sqr->pos_y);
         if (check_K(sqr, minst)) {
             printf("K found!!!\n");
             break;
 
         } else if (check_dead_end(sqr) && sqr->board[1][1] != 'P') {
+
             change_to_elem(sqr, filename, width, 'X');
             if (filling_process == 0) turn_back(minst);
             filling_process = 1;
+
+            if (check_forward(sqr, minst, 'X')) {       //musi być ten warunek bo inaczej to pójdzie do przodu nawet jak jest 'X'
+                if (check_right_elem(sqr, minst, ' '))
+                    turn_right(minst);
+                else
+                    turn_left(minst);
+            }
 
         } else if (check_right_elem(sqr, minst, ' ')) {
             turn_right(minst);
@@ -39,12 +45,11 @@ void fill_dead_end(square *sqr, MoveInstruction *minst, FILE *filename, const in
         } else if (check_forward(sqr, minst, ' ')) {
             filling_process = 0;
 
-        } else {
-            filling_process = 0;
+        } else if (check_left_elem(sqr, minst, ' ')) {
             turn_left(minst);
+            filling_process = 0;
         }
         move_forward(sqr, minst);
         get_square(sqr, filename, height, width);
-        sqr_print(sqr);
     }
 }
