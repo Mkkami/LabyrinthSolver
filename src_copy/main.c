@@ -30,7 +30,13 @@ int main(int argc, char **argv) {
         fclose(in);
         fclose(out);
         return -1;
+    } else if (height <4 || width <3 ) {
+        fprintf(stderr, "%s: Za mały labirynt.\n", argv[0]);
+        fclose(in);
+        fclose(out);
+        return -1;
     }
+
     //wypełnij plik
 
     // Dodanie górnej ściany labiryntu
