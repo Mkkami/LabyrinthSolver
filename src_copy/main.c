@@ -1,63 +1,50 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "file.h"
+#include "errors.h"
 
 int main(int argc, char **argv) {
     FILE *in, *out;
     int height, width;
     char elem;
 
-    if (argc < 2) {
-        fprintf(stderr, "%s: Brak podanego pliku.\n", argv[0]);
-        return 1;
-    }
+    int Err_val;
+    //Sprawdzenie czy jest plik
+    Err_val = check_input_err(argc, argv);
+    if (Err_val != 0)
+        return Err_val;
 
     in = fopen(argv[1], "r");
-    if (in == NULL) {
-        fprintf(stderr, "%s: Nie można otworzyć pliku %s\n", argv[0], argv[1]);
-        return 2;
-    }
-
-    out = fopen("TEMP/copy.maze", "w+");
-    if (out == NULL) {
-        fprintf(stderr, "%s: Nie można stworzyć pliku copy.maze\n", argv[0]);
-        fclose(in);
-        return 3;
-    }
     get_size(in, &height, &width);
-    if (height > 2048 || width > 2048) {
-        fprintf(stderr, "%s: Za duży labirynt. Maksymalne rozmiary: 1024x1024 liczone po ścieżkach.\n", argv[0]);
-        fclose(in);
-        fclose(out);
-        return -1;
-    } else if (height <4 || width <3 ) {
-        fprintf(stderr, "%s: Za mały labirynt.\n", argv[0]);
-        fclose(in);
-        fclose(out);
-        return -1;
-    }
+
+    //Sprawdzenie innych błędów
+    out = fopen("TEMP/copy.maze", "w+");
+    Err_val = check_err(in, out, height, width, argv);
+    if (Err_val != 0)
+        return Err_val;
+
+
 
     //wypełnij plik
 
-    // Dodanie górnej ściany labiryntu
+    // górna ściana
     for (int i = 0; i < width + 2; i++) {
         fputc('X', out);
     }
     fputc('\n', out);
     fputc('X', out);
-    // Dodanie ścian po lewej i po prawej stronie oraz skopiowanie zawartości labiryntu
+    // ściany po lewej o po prawej
     while ((elem = fgetc(in)) != EOF) {
         if (elem == '\n') {
-            fputc('X', out); // Dodanie ściany po lewej stronie
-            fputc('\n', out); // Przejście do nowej linii
-            fputc('X', out); // Dodanie ściany na początku nowej linii
-        } else {
-            fputc(elem, out); // Skopiowanie aktualnego elementu z labiryntu
+            fputc('X', out); // koniec linii
+            fputc('\n', out); 
+            fputc('X', out); // początek linii
+        } else if (elem != '\r') {  // pliki stworzone na windowsie mają \r\n zamiast \n
+            fputc(elem, out);
         }
-        //fputc('X', out); // Dodanie ściany po prawej stronie
     }
 
-    // Dodanie dolnej ściany labiryntu
+    // dolna ściana
     for (int i = 0; i < width + 1; i++) {
         fputc('X', out);
     }
