@@ -14,6 +14,6 @@
 
 void initiate(square*, MoveInstruction*, FILE*, const int, const int);
 void init_direction(square*, MoveInstruction*, const int, const int);
-void fill_dead_end(square *, MoveInstruction *, FILE *, const int, const int);
+int fill_dead_end(square *, MoveInstruction *, FILE *, const int, const int);
 
 #endif

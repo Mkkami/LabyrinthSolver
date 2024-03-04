@@ -17,8 +17,9 @@ void init_direction(square *sqr, MoveInstruction *minst, const int height, const
         minst->dir = NORTH;
 }
 
-void fill_dead_end(square *sqr, MoveInstruction *minst, FILE *filename, const int height, const int width) {
+int fill_dead_end(square *sqr, MoveInstruction *minst, FILE *filename, const int height, const int width) {
     int filling_process = 0;    //sprawdza czy już wypełnia pola, aby nie obrócić się drugi raz
+    int ile = 0;
 
     while (!end_reached(sqr, minst)) {
         if (check_K(sqr, minst)) {
@@ -28,6 +29,7 @@ void fill_dead_end(square *sqr, MoveInstruction *minst, FILE *filename, const in
         } else if (check_dead_end(sqr) && sqr->board[1][1] != 'P') {
 
             change_to_elem(sqr, filename, width, 'X');
+            ile++;
             if (filling_process == 0) turn_back(minst);
             filling_process = 1;
 
@@ -52,4 +54,5 @@ void fill_dead_end(square *sqr, MoveInstruction *minst, FILE *filename, const in
         move_forward(sqr, minst);
         get_square(sqr, filename, height, width);
     }
+    return ile;
 }
