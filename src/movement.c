@@ -1,75 +1,75 @@
 #include "movement.h"
 
-void turn_left(MoveInstruction *minst) {
-    switch(minst->dir) {
+void turn_left(enum Direction* dir) {
+    switch(*dir) {
         case NORTH:
-            minst->dir = WEST;
+            *dir = WEST;
             break;
         case EAST:
-            minst->dir = NORTH;
+            *dir = NORTH;
             break;
         case SOUTH:
-            minst->dir = EAST;
+            *dir = EAST;
             break;
         case WEST:
-            minst->dir = SOUTH;
+            *dir = SOUTH;
             break;
     }
 }
 
-void turn_right(MoveInstruction *minst) {
-    switch(minst->dir) {
+void turn_right(enum Direction* dir) {
+    switch(*dir) {
     case NORTH:
-        minst->dir = EAST;
+        *dir = EAST;
         break;
     case EAST:
-        minst->dir = SOUTH;
+        *dir = SOUTH;
         break;
     case SOUTH:
-        minst->dir = WEST;
+        *dir = WEST;
         break;
     case WEST:
-        minst->dir = NORTH;
+        *dir = NORTH;
         break;
     }
 }
 
-void move_forward(square *sqr, MoveInstruction *minst) {
-    switch(minst->dir) {
+void move_forward(chunk *ck, enum Direction dir) {
+    switch(dir) {
         case NORTH:
-            sqr->pos_y--;
+            ck->pos_y--;
             break;
         case EAST:
-            sqr->pos_x++;
+            ck->pos_x++;
             break;
         case SOUTH:
-            sqr->pos_y++;
+            ck->pos_y++;
             break;
         case WEST:
-            sqr->pos_x--;
+            ck->pos_x--;
             break;
     }
 }
 
-void turn_back(MoveInstruction *minst) {
-    switch(minst->dir) {
+void turn_back(enum Direction* dir) {
+    switch(*dir) {
     case NORTH:
-        minst->dir = SOUTH;
+        *dir = SOUTH;
         break;
     case EAST:
-        minst->dir = WEST;
+        *dir = WEST;
         break;
     case SOUTH:
-        minst->dir = NORTH;
+        *dir = NORTH;
         break;
     case WEST:
-        minst->dir = EAST;
+        *dir = EAST;
         break;
     }
 }
 #include <stdio.h>
-void print_dir(MoveInstruction *minst) {
-    switch(minst->dir) {
+void print_dir(enum Direction dir) {
+    switch(dir) {
     case NORTH:
         printf("NORTH");
         break;

@@ -6,8 +6,9 @@
 //ONLY FOR OPERATIONS ON FILE
 
 void print_file(const char*);
-void get_size(FILE*, int *, int *);
-void get_p_position(square*, FILE*, int);
-void change_to_elem(square *, FILE*, const int, const char);
+void get_maze_size(FILE*, int *, int *);
+void get_start_position(chunk*, FILE*, int);
+void change_to_cell(chunk *, FILE*, const int, const char);    //move to file_edit
+void copy_file(FILE*, FILE*);
 
 #endif

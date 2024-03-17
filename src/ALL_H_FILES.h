@@ -9,7 +9,7 @@
 #include "file.h"
 #include "movement.h"
 #include "solve.h"
-#include "square.h"
+#include "chunk.h"
 #include "checks.h"
 
 #endif

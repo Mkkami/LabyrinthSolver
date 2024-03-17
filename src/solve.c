@@ -1,58 +1,60 @@
 #include "solve.h"
 
-void initiate(square *sqr, MoveInstruction *minst, FILE *out, const int height, const int width) {
-    get_p_position(sqr, out, width);
-    get_square(sqr, out, height, width);
-    init_direction(sqr, minst, height, width);
+void initiate(chunk *ck, enum Direction *dir, FILE *out, const int height, const int width) {
+    get_start_position(ck, out, width);
+    get_chunk(ck, out, height, width);
+    init_direction(ck, dir, height, width);
 }
 
-void init_direction(square *sqr, MoveInstruction *minst, const int height, const int width) {
-    if (sqr->pos_x == 1)
-        minst->dir = EAST;
-    if (sqr->pos_x == width)
-        minst->dir = WEST;
-    if (sqr->pos_y == 1)
-        minst->dir = SOUTH;
-    if (sqr->pos_y == height)
-        minst->dir = NORTH;
+void init_direction(chunk *ck, enum Direction *dir, const int height, const int width) {
+    if (ck->pos_x == 0)
+        *dir = EAST;
+    if (ck->pos_x == width)
+        *dir = WEST;
+    if (ck->pos_y == 0)
+        *dir = SOUTH;
+    if (ck->pos_y == height)
+        *dir = NORTH;
 }
 
-int fill_dead_end(square *sqr, MoveInstruction *minst, FILE *filename, const int height, const int width) {
+int fill_dead_end(chunk *ck, enum Direction *dir, FILE *filename, const int height, const int width) {
     int filling_process = 0;    //sprawdza czy już wypełnia pola, aby nie obrócić się drugi raz
     int ile = 0;
 
-    while (!end_reached(sqr, minst)) {
-        if (check_K(sqr, minst)) {
+    while (!end_reached(ck, *dir)) {
+        if (adjacent_to_end(ck, *dir)) {
             printf("K found!!!\n");
             break;
 
-        } else if (check_dead_end(sqr) && sqr->board[1][1] != 'P') {
+        } else if (check_dead_end(ck) && ck->cells[1][1] != 'P') {
 
-            change_to_elem(sqr, filename, width, 'X');
+            change_to_cell(ck, filename, width, 'X');
             ile++;
-            if (filling_process == 0) turn_back(minst);
+            if (filling_process == 0) turn_back(dir);
             filling_process = 1;
 
-            if (check_forward(sqr, minst, 'X')) {       //musi być ten warunek bo inaczej to pójdzie do przodu nawet jak jest 'X'
-                if (check_right_elem(sqr, minst, ' '))
-                    turn_right(minst);
+            if (check_forward(ck, *dir, 'X')) {       //musi być ten warunek bo inaczej to pójdzie do przodu nawet jak jest 'X'
+                if (check_right_cell(ck, *dir, ' '))
+                    turn_right(dir);
                 else
-                    turn_left(minst);
+                    turn_left(dir);
             }
 
-        } else if (check_right_elem(sqr, minst, ' ')) {
-            turn_right(minst);
+        } else if (check_right_cell(ck, *dir, ' ')) {
+            turn_right(dir);
             filling_process = 0;
 
-        } else if (check_forward(sqr, minst, ' ')) {
+        } else if (check_forward(ck, *dir, ' ')) {
             filling_process = 0;
 
-        } else if (check_left_elem(sqr, minst, ' ')) {
-            turn_left(minst);
+        } else if (check_left_cell(ck, *dir, ' ')) {
+            turn_left(dir);
             filling_process = 0;
         }
-        move_forward(sqr, minst);
-        get_square(sqr, filename, height, width);
+        move_forward(ck, *dir);
+        get_chunk(ck, filename, height, width);
     }
     return ile;
 }
+
+// void print_steps(chunk *ck, enum Direction dir, FILE *filename, )

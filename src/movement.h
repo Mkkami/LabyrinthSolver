@@ -5,11 +5,11 @@
 
 //ONLY FOR MOVEMENT OPERATIONS
 
-void turn_left(MoveInstruction*);
-void turn_right(MoveInstruction*);
-void move_forward(square*, MoveInstruction*);
-void turn_back(MoveInstruction*);
+void turn_left(enum Direction*);
+void turn_right(enum Direction*);
+void move_forward(chunk*, enum Direction);
+void turn_back(enum Direction*);
 
-void print_dir(MoveInstruction*);
+void print_dir(enum Direction);
 
 #endif

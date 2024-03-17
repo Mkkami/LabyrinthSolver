@@ -3,17 +3,20 @@
 
 #include <stdio.h> //FILE
 #include "file.h" //get_p_position, change_to_elem, 
-#include "square.h" //get_square
+#include "chunk.h" //get_square
 
 #include "movement.h"
 #include "checks.h"
 
 #include "structures.h"
 
+
+
 //FOR SOLVING THE MAZE
 
-void initiate(square*, MoveInstruction*, FILE*, const int, const int);
-void init_direction(square*, MoveInstruction*, const int, const int);
-int fill_dead_end(square *, MoveInstruction *, FILE *, const int, const int);
+void initiate(chunk*, enum Direction*, FILE*, const int, const int);
+void init_direction(chunk*, enum Direction*, const int, const int);
+int fill_dead_end(chunk *, enum Direction*, FILE *, const int, const int);
+void print_steps(chunk*, enum Direction, FILE*, const int, const int);
 
 #endif

@@ -5,11 +5,11 @@
 
 //ALL STRUCTURES USED IN A PROGRAM
 
-typedef struct square {
-    int pos_x;
+typedef struct chunk {
+    int pos_x;  //pozycje w pliku
     int pos_y;
-    char **board;
-} square;
+    char cells[3][3];       //zmiana z ** na [][], nie trzeba malloca
+} chunk;
 
 enum Direction {
     NORTH,
@@ -18,9 +18,9 @@ enum Direction {
     WEST,
 };
 
-typedef struct MoveInstruction {
-    enum Direction dir;
-} MoveInstruction;
+// typedef struct MoveInstruction {        po prostu zmień na zwykłą zmienną zamiast strukture robić
+//     enum Direction dir;
+// } MoveInstruction;
 
 
 #endif
