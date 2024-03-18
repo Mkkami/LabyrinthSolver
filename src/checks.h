@@ -1,7 +1,8 @@
 #ifndef _CHECKS_H
 #define _CHECKS_H
 
-#include "structures.h"
+#include "chunk.h"
+#include "movement.h"
 
 //ONLY FOR CHECKING ELEMENTS IN THE chunk
 

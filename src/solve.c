@@ -1,7 +1,10 @@
 #include "solve.h"
+#include "chunk.h"
+#include "movement.h"
+#include "file.h"
 
 void initiate(chunk *ck, enum Direction *dir, FILE *out, const int height, const int width) {
-    get_start_position(ck, out, width);
+    //get_start_position(ck, out, width);
     get_chunk(ck, out, height, width);
     init_direction(ck, dir, height, width);
 }
@@ -28,7 +31,7 @@ int fill_dead_end(chunk *ck, enum Direction *dir, FILE *filename, const int heig
 
         } else if (check_dead_end(ck) && ck->cells[1][1] != 'P') {
 
-            change_to_cell(ck, filename, width, 'X');
+            change_to_cell(ck->pos_x, ck->pos_y, filename, width, 'X');
             ile++;
             if (filling_process == 0) turn_back(dir);
             filling_process = 1;
@@ -39,7 +42,8 @@ int fill_dead_end(chunk *ck, enum Direction *dir, FILE *filename, const int heig
                 else
                     turn_left(dir);
             }
-
+        
+        //  trzyma się prawej strony po prostu
         } else if (check_right_cell(ck, *dir, ' ')) {
             turn_right(dir);
             filling_process = 0;
@@ -51,7 +55,7 @@ int fill_dead_end(chunk *ck, enum Direction *dir, FILE *filename, const int heig
             turn_left(dir);
             filling_process = 0;
         }
-        move_forward(ck, *dir);
+        move_forward(&(ck->pos_x), &(ck->pos_y), *dir);
         get_chunk(ck, filename, height, width);
     }
     return ile;

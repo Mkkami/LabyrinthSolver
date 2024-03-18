@@ -1,5 +1,9 @@
-#include "ALL_H_FILES.h"
+//#include "ALL_H_FILES.h"
 #include <unistd.h>
+#include "chunk.h"
+#include "file.h"
+#include "movement.h"
+#include "solve.h"
 
 int main(int argc, char **argv) {
 
@@ -78,11 +82,15 @@ int main(int argc, char **argv) {
     }
 
     get_maze_size(in, &maze_height, &maze_width);
-    //printf("%d, %d\n", maze_height, maze_width);
 
     //copy and close input
     copy_file(in, copy);
     fclose(in);
+
+    int start_x, start_y;
+    get_start_position(copy, maze_width, &start_x, &start_y);
+    ck->pos_x = start_x;
+    ck->pos_y = start_y;
 
     
     initiate(ck, &dir, copy, maze_height, maze_width);

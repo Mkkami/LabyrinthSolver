@@ -34,19 +34,19 @@ void turn_right(enum Direction* dir) {
     }
 }
 
-void move_forward(chunk *ck, enum Direction dir) {
+void move_forward(int *pos_x, int *pos_y, enum Direction dir) {
     switch(dir) {
         case NORTH:
-            ck->pos_y--;
+            (*pos_y)--;
             break;
         case EAST:
-            ck->pos_x++;
+            (*pos_x)++;
             break;
         case SOUTH:
-            ck->pos_y++;
+            (*pos_y)++;
             break;
         case WEST:
-            ck->pos_x--;
+            (*pos_x)--;
             break;
     }
 }

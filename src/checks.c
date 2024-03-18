@@ -1,4 +1,5 @@
 #include "checks.h"
+#define MID 1
 
 int check_right_cell(chunk *ck, enum Direction dir, const char element) {
     int x = MID;

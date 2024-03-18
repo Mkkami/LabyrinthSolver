@@ -2,13 +2,13 @@
 #define _SOLVE_H
 
 #include <stdio.h> //FILE
-#include "file.h" //get_p_position, change_to_elem, 
+#include "file_edit.h" //get_p_position, change_to_elem, 
 #include "chunk.h" //get_square
 
 #include "movement.h"
 #include "checks.h"
 
-#include "structures.h"
+//#include "structures.h"
 
 
 

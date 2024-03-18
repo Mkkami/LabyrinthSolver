@@ -32,15 +32,15 @@ void get_maze_size(FILE *in, int *height, int *width) {
     fseek(in, 0, SEEK_SET);
 }
 
-void get_start_position(chunk *ck, FILE *in, int width) {
+void get_start_position(FILE *in, int width, int *start_x, int *start_y) {
     fseek(in, 0, SEEK_SET);
     char buf;
     int i = 0, j = 0;
     
     while (fscanf(in, "%c", &buf) != EOF) {
         if (buf == 'P') {
-            ck->pos_x = j;
-            ck->pos_y = i;
+            *start_x = j;
+            *start_y = i;
             return;
         } else if (buf == '\n') {
             j = 0;
@@ -51,12 +51,7 @@ void get_start_position(chunk *ck, FILE *in, int width) {
 
 }
 
-void change_to_cell(chunk *ck, FILE *in, const int width, const char element) {
-    int index =  ((ck->pos_y) * (width + 1)) + ck->pos_x;
-    fseek(in, index, SEEK_SET);
-    fputc(element, in);
-    // fseek(in, 0, SEEK_SET);
-}
+
 
 void copy_file(FILE *in, FILE *copy) {
     fseek(in, 0, SEEK_SET);
