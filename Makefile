@@ -1,3 +1,3 @@
-all:
-	gcc -Wall src/*.c -o msolve
+preprocessor:
+	gcc -Wall src_preprocessor/*.c -o graph
 
