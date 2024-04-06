@@ -44,13 +44,13 @@ void connecter(char **board, int **ID, int height, int width, int placed, FILE *
             if (board[i][j] == 'N') {
                 fprintf(out, "%d (%d %d):", ID[i][j], i, j);
                 udlf = check_direction(board, UP, height, width, j, i);
-                if (udlf > 0) fprintf(out, " %d %d", ID[i-udlf][j], udlf);
+                if (udlf > 0) fprintf(out, " [%d %d]", ID[i-udlf][j], udlf);
                 udlf = check_direction(board, DOWN, height, width, j, i);
-                if (udlf > 0) fprintf(out, " %d %d", ID[i+udlf][j], udlf);
+                if (udlf > 0) fprintf(out, " [%d %d]", ID[i+udlf][j], udlf);
                 udlf = check_direction(board, LEFT, height, width, j, i);
-                if (udlf > 0) fprintf(out, " %d %d", ID[i][j-udlf], udlf);
+                if (udlf > 0) fprintf(out, " [%d %d]", ID[i][j-udlf], udlf);
                 udlf = check_direction(board, RIGHT, height, width, j, i);
-                if (udlf > 0) fprintf(out, " %d %d", ID[i][j+udlf], udlf);
+                if (udlf > 0) fprintf(out, " [%d %d]", ID[i][j+udlf], udlf);
                 
                 fprintf(out, "\n");
             }

@@ -20,7 +20,7 @@ void get_ID_position(int *pos, FILE *in) {
 
 int get_connection(int *connection, FILE *in) {
 
-    if(fscanf(in, "%d %d", &connection[0], &connection[1]) == 2) {
+    if(fscanf(in, " [%d %d]", &connection[0], &connection[1]) == 2) {
         return 1;
     }
     return 0;
