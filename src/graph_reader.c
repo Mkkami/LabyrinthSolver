@@ -14,7 +14,10 @@ void get_start_end_ID(int *start_end, FILE *in) {
 
 void get_ID_position(int *pos, FILE *in) {
     
-    fscanf(in, "(%d %d)", &pos[0], &pos[1]);
+    if (fscanf(in, "(%d %d)", &pos[0], &pos[1]) != 2) {
+        fprintf(stderr, "graph_reader.c: Error reading pos\n");
+        exit(EXIT_FAILURE);
+    }
     
 }
 

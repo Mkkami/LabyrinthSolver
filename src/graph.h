@@ -21,12 +21,11 @@ typedef struct Position {
 } Position;
 
 Graph *createGraph(int);
-int createNode(Graph*, int*, int*, int);
+int createNode(Graph*, int[], int[], int);
 Position *createPositionList(int);
 void printGraph(Graph*, Position*);
 int fillGraph(Graph*, Position*, FILE*);
-
-void freeArrays(int*, int*, int*, int*);
+void freeGraph(Graph*);
 
 
 #endif

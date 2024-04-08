@@ -16,15 +16,15 @@ Graph* createGraph(int node_count) {
     return graph;
 }
 
-int createNode(Graph *graph, int *w, int *c, int id) {
+int createNode(Graph *graph, int w[], int c[], int id) {
     Node *node = malloc(sizeof(Node));
     if (node == NULL) {
         fprintf(stderr, "createNode: Memory allocation fail\n");
         return -1;
     }
     node->ID = id;
-    int index;
-    while (w[index] > 0) {
+    int index = 0;
+    while (w[index] > 0 && index < 4) {
         node->weight[index] = w[index];
         node->connections[index] = c[index];
         index++;
@@ -44,20 +44,23 @@ Position *createPositionList(int node_count) {
 
 void printGraph(Graph *graph, Position *position) {
     for (int i = 0; i < graph->node_count; i++) {
-        //printf("%d \n", graph->node_list[i]->ID);
-        printf("(%d %d)\n %d", position[i].x, position[i].y, i);
-        //printf("%d (%d %d)\n", graph->node_list[i]->ID, position[i].x, position[i].y);
+        
+        printf("id: %d pos: (%d, %d), connections:\t", graph->node_list[i]->ID, position[i].x, position[i].y);
+        for (int j = 0; graph->node_list[i]->weight[j] > 0 && j < 4; j++) {
+            printf("(%d %d) ", graph->node_list[i]->connections[j], graph->node_list[i]->weight[j]);
+        }
+        printf("\n");
     }
 }
 
 int fillGraph(Graph *graph, Position *position, FILE *in) {
-    int *pos = malloc(sizeof(int) * 2);
+    int pos[2];
     int id;
-    int *w = malloc(sizeof(int) * 4);
-    int *c = malloc(sizeof(int) * 4);
+    int w[4];
+    int c[4];
     //works to this point
     int connection_index = 0;
-    int *temp = malloc(sizeof(int) * 2);
+    int connection_temp[2];
     char character;
 
     for (int i = 0; i < graph->node_count; i++) {
@@ -66,32 +69,47 @@ int fillGraph(Graph *graph, Position *position, FILE *in) {
         }                   // is no connection
 
         // get id, position, connection x n
-        fscanf(in, "%d ", &id);             //get id
+        if( fscanf(in, "%d ", &id) != 1) {             //get id
+            fprintf(stderr, "graph.c: Error reading id from file.\n");
+            return 1;
+        }
+        
 
         get_ID_position(pos, in);
         position[i].x = pos[0];
         position[i].y = pos[1];     
-        printf("id: %d, position: %d, %d\n", id, pos[0], pos[1]);
+        //printf("id: %d, position: %d, %d\n", id, pos[0], pos[1]);
 
         if (fscanf(in, "%c", &character) == 0 || character != ':') {    //dziala
             fprintf(stderr, "main.c: Error in graph file.\n");
             fprintf(stderr, "Expected ':', got '%c'", character);
             return 1;
         }   
-        while (get_connection(temp, in) != 0) {     
-            c[connection_index] = temp[0];
-            w[connection_index] = temp[1];
+        while (get_connection(connection_temp, in) != 0) {     
+            c[connection_index] = connection_temp[0];
+            w[connection_index] = connection_temp[1];
             connection_index++;
         }
+        connection_index = 0;       //reset index so no stack smashing
 
         // save everything to node
 
         if (createNode(graph, w, c, id) == -1) {
+            fprintf(stderr, "graph.c: Error in creating node.\n");
             return -1;
         }
 
         // fscanf skips \n so no need to check it
 
     }
+
     return 0;
+}
+
+void freeGraph(Graph *graph) {
+    for (int i = 0; i < graph->node_count; i++) {
+        free(graph->node_list[i]);
+    }
+    free(graph->node_list);
+    free(graph);
 }

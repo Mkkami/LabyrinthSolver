@@ -2,6 +2,7 @@
 #define GRAPH_READER_H
 
 #include <stdio.h>
+#include <stdlib.h>
 
 
 int get_node_count(FILE*);

@@ -10,7 +10,7 @@ int main(int argc, char **argv) {
     node_count = get_node_count(in);
     printf("Nodes: %d\n", node_count);
 
-    int *start_end = malloc(sizeof(int) * 2);
+    int start_end[2];
     get_start_end_ID(start_end, in);
     printf("s: %d, e: %d\n", start_end[0], start_end[1]);
  
@@ -20,7 +20,13 @@ int main(int argc, char **argv) {
 
     fillGraph(graph, position, in);
 
-    //printGraph(graph, position);
+    printGraph(graph, position);
+
+    //printf("%d\n", graph->node_list[50]->ID);
+
+    freeGraph(graph);
+    free(position);
+
 
     return 0;
 }
