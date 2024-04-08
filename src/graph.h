@@ -6,7 +6,7 @@
 
 typedef struct Node {
     int ID;
-    int weight[4];
+    int weight[4];          //if there is no connection, weight = -1
     int connections[4];
 } Node;
 
@@ -20,11 +20,13 @@ typedef struct Position {
     int y;
 } Position;
 
-Graph *createGraph(int node_count);
-int createNode(Graph *graph, int *w, int *c, int id);
-Position *createPositionList(int node_count);
-void printGraph(Graph *graph, Position *position);
-int fillGraph(Graph *graph, Position *position, FILE *in);
+Graph *createGraph(int);
+int createNode(Graph*, int*, int*, int);
+Position *createPositionList(int);
+void printGraph(Graph*, Position*);
+int fillGraph(Graph*, Position*, FILE*);
+
+void freeArrays(int*, int*, int*, int*);
 
 
 #endif
