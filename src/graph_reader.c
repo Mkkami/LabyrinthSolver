@@ -21,11 +21,11 @@ void get_ID_position(int *pos, FILE *in) {
     
 }
 
-int get_connection(int *connection, FILE *in) {
-
-    if(fscanf(in, " [%d %d]", &connection[0], &connection[1]) == 2) {
-        return 1;
+int get_links(int *weight_temp, int* link_temp, FILE *in) {
+    for (int i = 0; i < 4; i++) {
+        if(fscanf(in, " [%d %d]", &link_temp[i], &weight_temp[i]) != 2) {
+        return 0;
+        }
     }
-    return 0;
-
+    return 1;
 }

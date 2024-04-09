@@ -38,20 +38,38 @@ void connecter(char **board, int **ID, int height, int width, int placed, FILE *
     // if P or K, also connect them
     // also save the distance between them (if they are adjacent then distance is 1 not 0)
     int udlf;
+    int link_count = 0;
 
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
             if (board[i][j] == 'N') {
                 fprintf(out, "%d (%d %d):", ID[i][j], i, j);
                 udlf = check_direction(board, UP, height, width, j, i);
-                if (udlf > 0) fprintf(out, " [%d %d]", ID[i-udlf][j], udlf);
+                if (udlf > 0){ 
+                    fprintf(out, " [%d %d]", ID[i-udlf][j], udlf); 
+                    link_count++;
+                }
                 udlf = check_direction(board, DOWN, height, width, j, i);
-                if (udlf > 0) fprintf(out, " [%d %d]", ID[i+udlf][j], udlf);
+                if (udlf > 0) {
+                    fprintf(out, " [%d %d]", ID[i+udlf][j], udlf); 
+                    link_count++;
+                }
                 udlf = check_direction(board, LEFT, height, width, j, i);
-                if (udlf > 0) fprintf(out, " [%d %d]", ID[i][j-udlf], udlf);
+                if (udlf > 0) { 
+                    fprintf(out, " [%d %d]", ID[i][j-udlf], udlf); 
+                    link_count++;
+                }
                 udlf = check_direction(board, RIGHT, height, width, j, i);
-                if (udlf > 0) fprintf(out, " [%d %d]", ID[i][j+udlf], udlf);
+                if (udlf > 0) {
+                    fprintf(out, " [%d %d]", ID[i][j+udlf], udlf); 
+                    link_count++;
+                }
                 
+                for (int l = 0; l < 4-link_count; l++) {    //max 4 links, substract existing links
+                    fprintf(out, " [-1 -1]");
+                }
+                link_count = 0;
+
                 fprintf(out, "\n");
             }
 

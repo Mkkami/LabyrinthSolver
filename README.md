@@ -5,9 +5,9 @@
 
 ### Latest changes:
 ```
-- Changed dynamic to static array where not needed
-- Fixed indexing in Graph
-- Fixed connection saving in Graph
+- changed preprocessor, now graph has the same amout of elements in each line
+- changed get_connection to get_links, now it gets all existing links between nodes
+- changed fillGraph function to make it simplier
 ```
 
 ----

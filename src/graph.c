@@ -56,45 +56,41 @@ void printGraph(Graph *graph, Position *position) {
 int fillGraph(Graph *graph, Position *position, FILE *in) {
     int pos[2];
     int id;
-    int w[4];
-    int c[4];
-    //works to this point
-    int connection_index = 0;
-    int connection_temp[2];
+    int weight_temp[4];
+    int link_temp[4];
     char character;
 
     for (int i = 0; i < graph->node_count; i++) {
         for (int j = 0; j < 4; j++) {
-            w[j] = -1;      //change it to -1 so i know there
+            weight_temp[j] = -1;      //change it to -1 so i know there
         }                   // is no connection
 
-        // get id, position, connection x n
-        if( fscanf(in, "%d ", &id) != 1) {             //get id
+            //  GET ID
+        if( fscanf(in, "%d ", &id) != 1) {
             fprintf(stderr, "graph.c: Error reading id from file.\n");
             return 1;
         }
         
-
+            // GET AND SAVE POSITIONS
         get_ID_position(pos, in);
         position[i].x = pos[0];
         position[i].y = pos[1];     
-        //printf("id: %d, position: %d, %d\n", id, pos[0], pos[1]);
 
-        if (fscanf(in, "%c", &character) == 0 || character != ':') {    //dziala
+            //  SKIP THE ":"
+        if (fscanf(in, "%c", &character) == 0 || character != ':') {
             fprintf(stderr, "main.c: Error in graph file.\n");
             fprintf(stderr, "Expected ':', got '%c'", character);
             return 1;
         }   
-        while (get_connection(connection_temp, in) != 0) {     
-            c[connection_index] = connection_temp[0];
-            w[connection_index] = connection_temp[1];
-            connection_index++;
+            //  GET EVERY LINK
+        if (get_links(weight_temp, link_temp, in) != 1) {
+            fprintf(stderr, "graph.c: Error in graph file.\n");
+            fprintf(stderr, "Link bad\n");
+            return 1;
         }
-        connection_index = 0;       //reset index so no stack smashing
 
-        // save everything to node
-
-        if (createNode(graph, w, c, id) == -1) {
+            //  save everything to node
+        if (createNode(graph, weight_temp, link_temp, id) == -1) {
             fprintf(stderr, "graph.c: Error in creating node.\n");
             return -1;
         }
