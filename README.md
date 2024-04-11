@@ -5,16 +5,13 @@
 
 ### Latest changes:
 ```
-- changed preprocessor, now graph has the same amout of elements in each line
-- changed get_connection to get_links, now it gets all existing links between nodes
-- changed fillGraph function to make it simplier
+- Implemented priority queue
 ```
 
 ----
 
 ### To do:
 ``` 
-- priority queue implementation
 - dijkstra algorithm
 - printing output
 - converting binary files
@@ -28,5 +25,6 @@
 ```
 - Graph position and id reading
 - Graph data saving
+- priority queue implementation
 - free memory
 ```
