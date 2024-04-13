@@ -8,6 +8,7 @@ typedef struct Node {
     int ID;
     int weight[4];          //if there is no connection, weight = -1
     int connections[4];
+    char visited;
 } Node;
 
 typedef struct Graph {
