@@ -3,7 +3,8 @@
 
 #include "priority_queue.h"
 #include "graph.h"
+#include "output.h"
 
-int dijkstra(Graph *, int , int );
+int dijkstra(Graph *, int , int, FILE *, Position* );
 
 #endif

@@ -5,18 +5,18 @@
 
 ### Latest changes:
 ```
-- Add dijkstra's algorithm that returns length of shortest path
-- Add "visited" value in graph node struct to prevent revisiting nodes
-- Changed priority queue and PQNode structs to store a node and not a pointer to node
+- added previous array to track path
+- printing path to file
+- added flags (-f, -o)
 ```
 
 ----
 
 ### To do:
 ``` 
-- printing output
+- memory?
+- write help flag
 - converting binary files
-- adding flags
 ```
 
 ---
@@ -29,4 +29,5 @@
 - priority queue implementation
 - free memory
 - Dijkstra's algorithm
+- Output
 ```

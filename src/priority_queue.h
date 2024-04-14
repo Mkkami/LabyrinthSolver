@@ -7,6 +7,7 @@
 typedef struct PQNode {
     int ID;
     unsigned short len;
+    int previousID;
 } PQNode;
 
 typedef struct PriorityQueue {
