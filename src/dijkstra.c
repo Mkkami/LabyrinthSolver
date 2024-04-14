@@ -3,7 +3,7 @@
 int dijkstra(Graph *graph, int start_ID, int end_ID, FILE *out, Position* pos) {
 
     PriorityQueue *pq = createQueue();
-    PQNode node = createPQNode(end_ID, 0);
+    PQNode node = {end_ID, 0};
     insert(pq, &node);
 
     PQNode currentNode, nextNode;
@@ -24,6 +24,9 @@ int dijkstra(Graph *graph, int start_ID, int end_ID, FILE *out, Position* pos) {
             continue;
         } 
         graph->node_list[currentNode.ID]->visited = 1;
+        // if (previous[currentNode.ID] < 0) {
+        //     continue;
+        // }
 
         previous[currentNode.ID] = currentNode.previousID;
 
@@ -43,7 +46,7 @@ int dijkstra(Graph *graph, int start_ID, int end_ID, FILE *out, Position* pos) {
         
     }
     fprintf(out, "Length: %d\n", currentNode.len);
-    printPath(pos, previous, out, end_ID, start_ID);
+    printPath(pos, previous, out, start_ID, end_ID);
 
     free(pq->array);
     free(pq);

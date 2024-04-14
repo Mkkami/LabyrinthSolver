@@ -5,9 +5,9 @@
 
 ### Latest changes:
 ```
-- added previous array to track path
-- printing path to file
-- added flags (-f, -o)
+- added help flags
+- small memory optimization
+- 
 ```
 
 ----
@@ -15,7 +15,6 @@
 ### To do:
 ``` 
 - memory?
-- write help flag
 - converting binary files
 ```
 
@@ -30,4 +29,5 @@
 - free memory
 - Dijkstra's algorithm
 - Output
+- Flags
 ```

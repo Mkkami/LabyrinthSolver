@@ -16,7 +16,7 @@ Graph* createGraph(int node_count) {
     return graph;
 }
 
-int createNode(Graph *graph, int w[], int c[], int id) {
+int createNode(Graph *graph, short w[], int c[], int id) {
     Node *node = malloc(sizeof(Node));
     if (node == NULL) {
         fprintf(stderr, "createNode: Memory allocation fail\n");
@@ -36,6 +36,10 @@ int createNode(Graph *graph, int w[], int c[], int id) {
 
 Position *createPositionList(int node_count) {
     Position *pos = malloc(sizeof(Position)*node_count);
+        if (pos == NULL) {
+        fprintf(stderr, "graph.c: Position memory allocation fail\n");
+        exit(EXIT_FAILURE);
+    }
     for (int i = 0; i < node_count; i++) {
         pos[i].x = 0;
         pos[i].y = 0;
@@ -46,7 +50,7 @@ Position *createPositionList(int node_count) {
 void printGraph(Graph *graph, Position *position) {
     for (int i = 0; i < graph->node_count; i++) {
         
-        printf("id: %d pos: (%d, %d), connections:\t", graph->node_list[i]->ID, position[i].x, position[i].y);
+        printf("id: %d pos: (%hd, %hd), connections:\t", graph->node_list[i]->ID, position[i].x, position[i].y);
         for (int j = 0; graph->node_list[i]->weight[j] > 0 && j < 4; j++) {
             printf("(%d %d) ", graph->node_list[i]->connections[j], graph->node_list[i]->weight[j]);
         }
@@ -55,9 +59,9 @@ void printGraph(Graph *graph, Position *position) {
 }
 
 int fillGraph(Graph *graph, Position *position, FILE *in) {
-    int pos[2];
+    short pos[2];
     int id;
-    int weight_temp[4];
+    short weight_temp[4];
     int link_temp[4];
     char character;
 

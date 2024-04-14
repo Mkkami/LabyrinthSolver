@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
     char *input_filename = NULL;
     char *output_filename = NULL;
     
-    while ((c = getopt(argc, argv, "f:o:c:")) != -1) {
+    while ((c = getopt(argc, argv, "f:o:h")) != -1) {
         switch (c) {
             case 'f':
                 input_filename = optarg;
@@ -19,8 +19,12 @@ int main(int argc, char **argv) {
             case 'o':
                 output_filename = optarg;
                 break;
+            case 'h':
+                fprintf(stdout, "help: ./graph -f <plik_wejsciowy> -o <plik_wyjsciowy>\n");
+                return 0;
             default:
-                break;
+                fprintf(stdout, "help: ./graph -f <plik_wejsciowy> -o <plik_wyjsciowy>\n");
+                return 0;
         }
     }
     if (input_filename == NULL) {
@@ -49,16 +53,12 @@ int main(int argc, char **argv) {
         return 2;
     }
 
-
-
-
     int start[2];
     int end[2];
 
     int height, width;
 
     get_maze_size(in, &height, &width, start, end);
-    printf("h:%d, w:%d", height, width);
 
     char **board;
     int **ID;
@@ -81,10 +81,17 @@ int main(int argc, char **argv) {
 
     connecter(board, ID, height,  width,  placed, out);
 
-    printf("placed: %d", placed);
-    printf("h:%d, w:%d", height, width);
-    
+    printf("placed nodes: %d\n", placed);
+    printf("h: %d, w: %d\n", height, width);
 
+    
+    for (int i = 0; i < height; i++) {
+        free(board[i]);
+        free(ID[i]);
+    }
+    free(board);
+    free(ID);
+    fclose(out);
 
 
 

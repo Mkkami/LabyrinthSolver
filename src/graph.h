@@ -17,12 +17,12 @@ typedef struct Graph {
 } Graph;
 
 typedef struct Position {
-    int x;
-    int y;
+    short x;
+    short y;
 } Position;
 
 Graph *createGraph(int);
-int createNode(Graph*, int[], int[], int);
+int createNode(Graph*, short[], int[], int);
 Position *createPositionList(int);
 void printGraph(Graph*, Position*);
 int fillGraph(Graph*, Position*, FILE*);

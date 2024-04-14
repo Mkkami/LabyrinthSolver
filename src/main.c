@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
     char *input_filename = NULL;
     char *output_filename = NULL;
     
-    while ((c = getopt(argc, argv, "f:o:c:")) != -1) {
+    while ((c = getopt(argc, argv, "f:o:c:h")) != -1) {
         switch (c) {
             case 'f':
                 input_filename = optarg;
@@ -19,8 +19,16 @@ int main(int argc, char **argv) {
             case 'o':
                 output_filename = optarg;
                 break;
+            case 'h':
+                fprintf(stdout, "help: ./solver -f <plik_wejsciowy> -o <plik_wyjsciowy>");
+                fprintf(stdout, "\n Przykład użycia: ");
+                fprintf(stdout, "\n./solver -f mgraph.txt -o output.txt\n");
+                return 0;
             default:
-                break;
+                fprintf(stdout, "help: ./solver -f <plik_wejsciowy> -o <plik_wyjsciowy>");
+                fprintf(stdout, "\n Przykład użycia: ");
+                fprintf(stdout, "\n./solver -f mgraph.txt -o output.txt\n");
+                return 0;
         }
     }
     if (input_filename == NULL) {
@@ -49,13 +57,13 @@ int main(int argc, char **argv) {
         return 2;
     }
 
-    int node_count = 0;
-    node_count = get_node_count(in);
+    int node_count = get_node_count(in);
     printf("Nodes: %d\n", node_count);
 
-    int start_end[2];
-    get_start_end_ID(start_end, in);
-    printf("s: %d, e: %d\n", start_end[0], start_end[1]);
+    int start_ID;
+    int end_ID;
+    get_start_end_ID(&start_ID, &end_ID, in);
+    printf("s: %d, e: %d\n", start_ID, end_ID);
  
 
     Graph *graph = createGraph(node_count);
@@ -63,12 +71,13 @@ int main(int argc, char **argv) {
 
     fillGraph(graph, position, in);
 
-    dijkstra(graph, start_end[0], start_end[1], out, position);
+    dijkstra(graph, start_ID, end_ID, out, position);
 
     fclose(in);
     fclose(out);
     freeGraph(graph);
     free(position);
+    printf("siema dziala");
 
     return 0;
 }

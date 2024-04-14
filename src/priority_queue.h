@@ -22,7 +22,7 @@ void insert(PriorityQueue*, PQNode*);                  //and sort
 PQNode pop(PriorityQueue*);                       //return lowest
 char is_empty(PriorityQueue*);
 void printPQ(PriorityQueue *pq);
-PQNode createPQNode(int ID, unsigned short len);
+
 void freePQ(PriorityQueue *pq);
 
 #endif
