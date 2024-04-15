@@ -5,15 +5,14 @@
 
 ### Latest changes:
 ```
-- small memory changes
+- BIG memory optimization (but EXTREMLY SLOW)
 ```
 
 ----
 
 ### To do:
 ``` 
-- memory?
-- converting binary files (not full)
+- TIME
 ```
 
 ---
@@ -28,4 +27,6 @@
 - Dijkstra's algorithm
 - Output
 - Flags
+- binary files
+- Memory optimized :(
 ```

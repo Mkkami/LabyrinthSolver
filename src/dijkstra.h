@@ -4,7 +4,8 @@
 #include "priority_queue.h"
 #include "graph.h"
 #include "output.h"
+#include "graph_reader.h"
 
-int dijkstra(Graph *, int , int, FILE *, Position* );
+int dijkstra(FILE *in, FILE*out, int start_ID, int end_ID, int node_count);
 
 #endif

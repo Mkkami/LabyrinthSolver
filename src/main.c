@@ -56,27 +56,17 @@ int main(int argc, char **argv) {
                          argv[0], output_filename);
         return 2;
     }
-
-    int node_count = get_node_count(in);
-    printf("Nodes: %d\n", node_count);
-
+    int node_count;
     int start_ID;
     int end_ID;
-    get_start_end_ID(&start_ID, &end_ID, in);
-    printf("s: %d, e: %d\n", start_ID, end_ID);
- 
+    get_header(in, &node_count, &start_ID, &end_ID);
 
-    Graph *graph = createGraph(node_count);
-    Position *position = createPositionList(node_count);
+    fprintf(stderr, "Running dijkstra's algorithm...\n");   //jak jest na stdout to +1,100 bajtów
 
-    fillGraph(graph, position, in);
-
-    dijkstra(graph, start_ID, end_ID, out, position);
-
+    dijkstra(in, out, start_ID, end_ID, node_count);
+    
     fclose(in);
     fclose(out);
-    freeGraph(graph);
-    free(position);
 
     return 0;
 }

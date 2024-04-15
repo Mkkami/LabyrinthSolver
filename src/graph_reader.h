@@ -5,9 +5,9 @@
 #include <stdlib.h>
 
 
-int get_node_count(FILE*);
-void get_start_end_ID(int*, int*, FILE*); //[start, end] 
-void get_ID_position(short*, FILE*); //[x, y]
-int get_links(short*, int*, FILE*); // [id, weight] x 4
+void get_header(FILE*in, int *nodes, int *start_ID, int *end_ID);
+void get_node(FILE *in, int *links, short *weights, int ID, int node_count);
+void get_positions(FILE *in, short *x, short *y);
+void go_next_line(FILE *in);
 
 #endif

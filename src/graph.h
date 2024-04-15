@@ -6,26 +6,12 @@
 
 typedef struct Node {
     int ID;
-    int weight[4];          //if there is no connection, weight = -1
+    short weight[4];          //if there is no connection, weight = -1
     int connections[4];
 } Node;
 
-typedef struct Graph {
-    int node_count;
-    struct Node **node_list;
-} Graph;
 
-typedef struct Position {
-    short x;
-    short y;
-} Position;
-
-Graph *createGraph(int);
-int createNode(Graph*, short[], int[], int);
-Position *createPositionList(int);
-void printGraph(Graph*, Position*);
-int fillGraph(Graph*, Position*, FILE*);
-void freeGraph(Graph*);
+Node createNode(int, int[], short[]);
 
 
 #endif

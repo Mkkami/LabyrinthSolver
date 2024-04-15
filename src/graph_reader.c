@@ -1,31 +1,39 @@
 #include "graph_reader.h"
 
-int get_node_count(FILE *in) {
-    int value;
-    fscanf(in, "%d ", &value);
-    return value;
+void get_header(FILE*in, int *nodes, int *start_ID, int *end_ID) {
+    fscanf(in, "%d %d %d", nodes, start_ID, end_ID);
 }
 
-void get_start_end_ID(int *start_ID, int *end_ID, FILE *in) {
-
-    fscanf(in, "%d %d\n", start_ID, end_ID);
-
-}
-
-void get_ID_position(short *pos, FILE *in) {
-    
-    if (fscanf(in, "(%hd %hd)", &pos[0], &pos[1]) != 2) {
-        fprintf(stderr, "graph_reader.c: Error reading pos\n");
-        exit(EXIT_FAILURE);
+void get_node(FILE *in, int *links, short *weights, int ID, int node_count) {
+    int read_ID;
+    int temp;
+    fscanf(in, "%d (%d %d):", &read_ID, &temp, &temp);
+    if (read_ID > ID) {
+        rewind(in);
+        go_next_line(in);
+        fscanf(in, "%d (%d %d):", &read_ID, &temp, &temp);
     }
-    
-}
-
-int get_links(short *weight_temp, int* link_temp, FILE *in) {
-    for (int i = 0; i < 4; i++) {
-        if(fscanf(in, " [%d %hd]", &link_temp[i], &weight_temp[i]) != 2) {
-        return 0;
+     if (read_ID == ID) {
+        // pass
+    } else {
+        while (read_ID < ID) {
+            go_next_line(in);
+            fscanf(in, "%d (%d %d):", &read_ID, &temp, &temp);
         }
     }
-    return 1;
+    for (int i = 0; i < 4; i++) {
+        fscanf(in, " [%d %hd]", &links[i], &weights[i]);
+    }
+
+    if (read_ID == node_count-1 || read_ID == node_count) {
+        rewind(in);
+        go_next_line(in);
+    }
+}
+
+void go_next_line(FILE *in) {
+    char c;
+    while((c = fgetc(in)) != '\n') {
+        continue;
+    }
 }
