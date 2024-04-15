@@ -61,9 +61,12 @@ int main(int argc, char **argv) {
     int end_ID;
     get_header(in, &node_count, &start_ID, &end_ID);
 
+    int file_positions[node_count];
+    get_file_positions(in, file_positions, node_count);
+
     fprintf(stderr, "Running dijkstra's algorithm...\n");   //jak jest na stdout to +1,100 bajtów
 
-    dijkstra(in, out, start_ID, end_ID, node_count);
+    dijkstra(in, out, start_ID, end_ID, node_count, file_positions);
     
     fclose(in);
     fclose(out);

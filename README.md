@@ -5,14 +5,14 @@
 
 ### Latest changes:
 ```
-- BIG memory optimization (but EXTREMLY SLOW)
+- HUGE time and memory optimization ( >1h to 13s)
 ```
 
 ----
 
 ### To do:
 ``` 
-- TIME
+- nothing?
 ```
 
 ---
@@ -28,5 +28,6 @@
 - Output
 - Flags
 - binary files
-- Memory optimized :(
+- Memory optimized :>>
+- Time optimized
 ```

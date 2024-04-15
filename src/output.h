@@ -4,13 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct Position {
-    short x;
-    short y;
-} Position;
 
-void printPath(Position *ps, int*, FILE*, int, int);
-Position *createPositionList(FILE*, int);
-
+void printPath(int*, int*, FILE*, FILE*, int, int);
+void get_pos(FILE*, int, short*, short*);
 
 #endif

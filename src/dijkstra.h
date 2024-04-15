@@ -6,6 +6,6 @@
 #include "output.h"
 #include "graph_reader.h"
 
-int dijkstra(FILE *in, FILE*out, int start_ID, int end_ID, int node_count);
+int dijkstra(FILE *in, FILE*out, int start_ID, int end_ID, int node_count, int*);
 
 #endif

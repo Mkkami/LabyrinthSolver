@@ -1,10 +1,6 @@
 #include "dijkstra.h"
 
-int dijkstra(FILE *in, FILE*out, int start_ID, int end_ID, int node_count) {
-
-    fprintf(stderr, "Creating Position List...\t");
-    Position *pos = createPositionList(in, node_count);
-    fprintf(stderr, "Done!\n");
+int dijkstra(FILE *in, FILE*out, int start_ID, int end_ID, int node_count, int *file_positions) {
 
     PriorityQueue *pq = createQueue();
     PQNode node = {end_ID, 0};
@@ -37,7 +33,7 @@ int dijkstra(FILE *in, FILE*out, int start_ID, int end_ID, int node_count) {
             break;
         }
         
-        get_node(in, links, weights, currentNode.ID, node_count);
+        get_node(in, links, weights, file_positions[currentNode.ID], node_count);
         graphNode = createNode(currentNode.ID, links, weights);
 
         for (int i = 0; i < 4 && graphNode.weight[i] > 0; i++) {
@@ -51,15 +47,15 @@ int dijkstra(FILE *in, FILE*out, int start_ID, int end_ID, int node_count) {
         }
         
     }
+    fprintf(stderr, "Dijkstra finished!\n\n");
     fprintf(out, "Length: %d\n", currentNode.len);
     fprintf(stderr, "Saving path...\n");
-    printPath(pos, previous, out, start_ID, end_ID);
+    printPath(file_positions, previous, in, out, start_ID, end_ID);
     fprintf(stderr, "Path saved!\n");
     //printf("PQ final size: %hd\n", pq->size);
 
     free(pq->array);
     free(pq);
-    free(pos);
 
     return 0;
 
