@@ -5,9 +5,7 @@
 
 ### Latest changes:
 ```
-- added help flags
-- small memory optimization
-- 
+- added program converting binary maze to txt
 ```
 
 ----
@@ -15,7 +13,7 @@
 ### To do:
 ``` 
 - memory?
-- converting binary files
+- converting binary files (not full)
 ```
 
 ---
