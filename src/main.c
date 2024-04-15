@@ -77,7 +77,6 @@ int main(int argc, char **argv) {
     fclose(out);
     freeGraph(graph);
     free(position);
-    printf("siema dziala");
 
     return 0;
 }

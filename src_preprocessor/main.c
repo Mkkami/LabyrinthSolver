@@ -75,7 +75,7 @@ int main(int argc, char **argv) {
     int placed;
     placed = placer(board, height, width);
     ID_fill(board, ID, height, width);
-    print_board(board, height, width);
+    //print_board(board, height, width);
 
     fprintf(out, "%d %d %d\n", placed, ID[start[0]][start[1]], ID[end[0]][end[1]]);
 

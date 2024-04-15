@@ -12,7 +12,7 @@ typedef struct PQNode {
 
 typedef struct PriorityQueue {
     struct PQNode *array;
-    int size;
+    short size;
     int last;
 } PriorityQueue;
 
@@ -22,7 +22,6 @@ void insert(PriorityQueue*, PQNode*);                  //and sort
 PQNode pop(PriorityQueue*);                       //return lowest
 char is_empty(PriorityQueue*);
 void printPQ(PriorityQueue *pq);
-
 void freePQ(PriorityQueue *pq);
 
 #endif

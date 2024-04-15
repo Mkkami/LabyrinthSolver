@@ -19,14 +19,10 @@ int dijkstra(Graph *graph, int start_ID, int end_ID, FILE *out, Position* pos) {
     while(!is_empty(pq)) {
 
         currentNode = pop(pq);
-                    
-        if (graph->node_list[currentNode.ID]->visited ) {
+
+        if (previous[currentNode.ID] > 0) {
             continue;
-        } 
-        graph->node_list[currentNode.ID]->visited = 1;
-        // if (previous[currentNode.ID] < 0) {
-        //     continue;
-        // }
+        }
 
         previous[currentNode.ID] = currentNode.previousID;
 
@@ -47,6 +43,7 @@ int dijkstra(Graph *graph, int start_ID, int end_ID, FILE *out, Position* pos) {
     }
     fprintf(out, "Length: %d\n", currentNode.len);
     printPath(pos, previous, out, start_ID, end_ID);
+    printf("PQ final size: %hd\n", pq->size);
 
     free(pq->array);
     free(pq);

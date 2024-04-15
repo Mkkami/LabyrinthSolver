@@ -5,7 +5,7 @@
 
 ### Latest changes:
 ```
-- added program converting binary maze to txt
+- small memory changes
 ```
 
 ----

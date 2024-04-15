@@ -8,10 +8,7 @@ PriorityQueue *createQueue() {
     return pq;
 }
 
-PQNode createPQNode(int ID, unsigned short len) {
-    PQNode node = {ID, len};
-    return node;
-}
+
 void insert(PriorityQueue *pq, PQNode *node) {
     if (pq->last == pq->size-1) {       //if pq->last = 1, then pq->size = 2 (there are 2 elems)
         pq->size++;

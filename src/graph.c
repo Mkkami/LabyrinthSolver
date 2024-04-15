@@ -23,7 +23,6 @@ int createNode(Graph *graph, short w[], int c[], int id) {
         return -1;
     }
     node->ID = id;
-    node->visited = 0;
     int index = 0;
     while (w[index] > 0 && index < 4) {
         node->weight[index] = w[index];
