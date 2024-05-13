@@ -1,2 +1,2 @@
-# LabyrinthSolver
+# MazeSolver C
 >Michał Marciniak
